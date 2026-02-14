@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alejandra Manager</title>
+    <link rel="website icon" href="{{ url_for('static', filename='img/am.png') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Logo y header (SIN controles de ventana) -->
+    <div class="header">
+        <div class="logo-container">
+            <div class="logo-circle">
+                <img src="{{ url_for('static', filename='img/aml.png') }}" alt="Alejandra Manager" class="logo-circle">
+            </div>
+            <h1 class="logo-text">Alejandra Manager</h1>
+        </div>
+    </div>
+
+    <!-- Contenedor principal -->
+    <div id="app-container">
+        
+        <!-- Pantalla de Login -->
+        <div id="login-screen" class="screen active">
+            <div class="auth-card">
+                <img src="{{ url_for('static', filename='img/aml.png') }}" alt="Alejandra Manager" class="logo">
+                <h2 class="auth-title">LOG IN</h2>
+                
+                <div class="input-group">
+                    <label>Usuario</label>
+                    <input type="text" id="login-username" autocomplete="username">
+                </div>
+                
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="login-password" autocomplete="current-password">
+                </div>
+                
+                <button class="btn-continuar" id="btn-login">Continuar</button>
+                
+                <p class="toggle-auth">
+                    <a href="#" id="show-register">¿No tienes cuenta?</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Pantalla de Registro -->
+        <div id="register-screen" class="screen">
+            <div class="auth-card">
+                <img src="{{ url_for('static', filename='img/aml.png') }}" alt="Alejandra Manager" class="logo">
+                <h2 class="auth-title">SIGN IN</h2>
+                
+                <div class="input-group">
+                    <label>Usuario</label>
+                    <input type="text" id="register-username" autocomplete="username">
+                </div>
+                
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="register-password" autocomplete="new-password">
+                </div>
+                
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" id="register-email" autocomplete="email">
+                </div>
+                
+                <button class="btn-continuar" id="btn-register">Continuar</button>
+                
+                <p class="toggle-auth">
+                    <a href="#" id="show-login">¿Ya tienes cuenta?</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Pantalla Principal (Servicios) -->
+        <div id="services-screen" class="screen">
+            <h2 class="section-title">Servicios</h2>
+            
+            <div class="grid-container" id="services-grid">
+                <!-- Los servicios se cargarán dinámicamente -->
+                <div class="grid-item add-item">
+                    <div class="plus-icon">+</div>
+                </div>
+            </div>
+
+            <!-- Usuario en footer -->
+            <div class="user-footer" id="user-footer">
+                <div class="user-avatar">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="40" fill="#333"/>
+                        <circle cx="50" cy="40" r="15" fill="#555"/>
+                        <path d="M 25 75 Q 50 60 75 75" fill="#555"/>
+                    </svg>
+                </div>
+                <span class="user-name">{Username}</span>
+            </div>
+        </div>
+
+        <!-- Pantalla de Cuentas (SIN footer de usuario) -->
+        <div id="accounts-screen" class="screen">
+            <div class="screen-header">
+                <button class="back-button" id="back-to-services">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </button>
+                
+                <h2 class="section-title" id="accounts-title">Cuentas | <span id="service-name-display">Servicio</span></h2>
+            </div>
+            
+            <div class="grid-container" id="accounts-grid">
+                <div class="grid-item add-item" id="add-account-btn">
+                    <div class="plus-icon">+</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pantalla de Perfil de Usuario -->
+        <div id="profile-screen" class="screen">
+            <div class="screen-header">
+                <button class="back-button" id="back-from-profile">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="profile-container">
+                <!-- Input oculto para cambiar avatar -->
+                <input type="file" id="profile-avatar-input" accept="image/*" style="display: none;">
+                
+                <div class="profile-avatar" id="profile-avatar">
+                    <div class="avatar-overlay">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 4V20M4 12H20" stroke="white" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="45" fill="#333"/>
+                        <circle cx="50" cy="40" r="18" fill="#555"/>
+                        <path d="M 20 85 Q 50 65 80 85" fill="#555"/>
+                    </svg>
+                </div>
+
+                <h2 class="profile-username" id="profile-username">{Username}</h2>
+
+                <div class="profile-field">
+                    <label>Email</label>
+                    <div class="field-with-edit">
+                        <input type="email" id="profile-email" readonly>
+                        <button class="edit-btn" data-field="email">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 20H21M16 4L20 8L8 20H4V16L16 4Z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="profile-field">
+                    <label>Password</label>
+                    <div class="field-with-edit">
+                        <input type="password" value="**********" readonly>
+                        <button class="edit-btn" data-field="password">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 20H21M16 4L20 8L8 20H4V16L16 4Z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="profile-stats">
+                    <p>Cuentas: <span id="account-count">0</span></p>
+                    <p>UID: <span id="user-uid">{UID}</span></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal: Nuevo Servicio -->
+    <div id="modal-new-service" class="modal">
+        <div class="modal-content">
+            <h3 class="modal-title">NUEVO SERVICIO</h3>
+            
+            <div class="upload-icon-container">
+                <input type="file" id="service-icon-input" accept="image/*" style="display: none;">
+                <button class="upload-icon-btn" id="service-icon-btn">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 4V20M4 12H20" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </button>
+                <div id="service-icon-preview" class="icon-preview"></div>
+            </div>
+
+            <div class="input-group">
+                <label>Nombre</label>
+                <input type="text" id="service-name-input">
+            </div>
+
+            <button class="btn-continuar" id="btn-create-service">Continuar</button>
+        </div>
+    </div>
+
+    <!-- Modal: Nueva Cuenta -->
+    <div id="modal-new-account" class="modal">
+        <div class="modal-content modal-scrollable">
+            <h3 class="modal-title">NUEVA CUENTA</h3>
+            
+            <div class="upload-icon-container">
+                <input type="file" id="account-icon-input" accept="image/*" style="display: none;">
+                <button class="upload-icon-btn" id="account-icon-btn">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 4V20M4 12H20" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </button>
+                <div id="account-icon-preview" class="icon-preview"></div>
+            </div>
+
+            <div class="input-group">
+                <label>Nombre</label>
+                <input type="text" id="account-name-input" placeholder="Opcional">
+            </div>
+
+            <div class="input-group">
+                <label>Usuario</label>
+                <input type="text" id="account-username-input">
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="account-password-input">
+            </div>
+
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" id="account-email-input" placeholder="Opcional">
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="account-inicio-servicio">
+                <label for="account-inicio-servicio">Inicio por servicio</label>
+            </div>
+
+            <div class="images-section">
+                <h4>Imagenes</h4>
+                <div class="images-grid" id="account-images-grid">
+                    <button class="add-image-btn" id="add-account-image">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 4V20M4 12H20" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </button>
+                </div>
+                <input type="file" id="account-images-input" accept="image/*" multiple style="display: none;">
+            </div>
+
+            <button class="btn-continuar" id="btn-create-account">Continuar</button>
+        </div>
+    </div>
+
+    <!-- Modal: Ver Imágenes -->
+    <div id="modal-view-images" class="modal">
+        <div class="modal-content">
+            <h3 class="modal-title">IMAGENES</h3>
+            
+            <div class="images-gallery" id="images-gallery">
+                <!-- Imágenes se cargan dinámicamente -->
+            </div>
+
+            <button class="btn-continuar" id="btn-close-images">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- Modal: Ver Cuenta -->
+    <div id="modal-view-account" class="modal">
+        <div class="modal-content">
+            <button class="modal-close-btn" id="btn-close-account-modal" title="Cerrar">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+
+            <div class="account-icon-display" id="account-view-icon">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="40" fill="#333"/>
+                </svg>
+            </div>
+
+            <h3 class="modal-title" id="account-view-name">{NOMBRE}</h3>
+
+            <div class="account-detail">
+                <label>Usuario</label>
+                <div class="detail-value-copy">
+                    <span id="account-view-username">{Usuario}</span>
+                    <button class="copy-btn" data-copy="username">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                            <rect x="9" y="9" width="13" height="13" stroke="currentColor" stroke-width="2"/>
+                            <path d="M5 15H4C2.89543 15 2 14.1046 2 13V4C2 2.89543 2.89543 2 4 2H13C14.1046 2 15 2.89543 15 4V5" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="account-detail">
+                <label>Password</label>
+                <div class="detail-value-copy">
+                    <span id="account-view-password">{Password}</span>
+                    <button class="copy-btn" data-copy="password">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                            <rect x="9" y="9" width="13" height="13" stroke="currentColor" stroke-width="2"/>
+                            <path d="M5 15H4C2.89543 15 2 14.1046 2 13V4C2 2.89543 2.89543 2 4 2H13C14.1046 2 15 2.89543 15 4V5" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="account-detail">
+                <label>Email</label>
+                <div class="detail-value-copy">
+                    <span id="account-view-email">{Email}</span>
+                    <button class="copy-btn" data-copy="email">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                            <rect x="9" y="9" width="13" height="13" stroke="currentColor" stroke-width="2"/>
+                            <path d="M5 15H4C2.89543 15 2 14.1046 2 13V4C2 2.89543 2.89543 2 4 2H13C14.1046 2 15 2.89543 15 4V5" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="account-detail" id="account-view-inicio-container">
+                <label>Inicio por servicio:</label>
+                <span id="account-view-inicio"></span>
+            </div>
+
+            <div class="account-actions">
+                <button class="icon-btn edit-btn" id="btn-edit-account" title="Editar cuenta">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 20H21M16 4L20 8L8 20H4V16L16 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <button class="icon-btn delete-btn" id="btn-delete-account" title="Eliminar cuenta">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M3 6H5H21M8 6V4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V6M19 6V20C19 21.1046 18.1046 22 17 22H7C5.89543 22 5 21.1046 5 20V6H19ZM10 11V17M14 11V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Editar Cuenta -->
+    <div id="modal-edit-account" class="modal">
+        <div class="modal-content modal-scrollable">
+            <h3 class="modal-title">EDITAR CUENTA</h3>
+
+            <div class="input-group">
+                <label>Nombre</label>
+                <input type="text" id="edit-name-input">
+            </div>
+
+            <div class="input-group">
+                <label>Usuario</label>
+                <input type="text" id="edit-username-input">
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="edit-password-input">
+            </div>
+
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" id="edit-email-input">
+            </div>
+
+            <button class="btn-continuar" id="btn-save-changes">Guardar Cambios</button>
+            <button class="btn-continuar btn-cancel" id="btn-cancel-edit">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- Modal: Cambiar Password -->
+    <div id="modal-change-password" class="modal">
+        <div class="modal-content">
+            <h3 class="modal-title">PASSWORD</h3>
+
+            <div class="input-group">
+                <label>Password Actual</label>
+                <input type="password" id="current-password">
+            </div>
+
+            <div class="input-group">
+                <label>Password Nuevo</label>
+                <input type="password" id="new-password">
+            </div>
+
+            <button class="btn-continuar" id="btn-update-password">Continuar</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/compress-image.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
