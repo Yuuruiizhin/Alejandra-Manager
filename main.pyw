@@ -6,11 +6,14 @@ Solo pide puerto y abre el gestor
 
 import os
 import sys
+import socket
 import threading
 import webbrowser
 import time
 from pathlib import Path
 from PIL import Image
+
+
 
 # Agregar el directorio actual al path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -32,6 +35,7 @@ from alejandra_manager import app, init_directories
 # Tema dark
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("dark-blue")
+ip=socket.gethostbyname(socket.gethostname())
 
 class LauncherSimple:
     def __init__(self, root):
@@ -132,15 +136,15 @@ class LauncherSimple:
             
         except Exception as e:
             print(f"❌ Error: {e}")
-    
+            
     def run_flask(self):
         """Ejecuta Flask"""
         try:
-            time.sleep(1)
-            print(f"✅ Servidor iniciado en http://localhost:{self.port}")
+            time.sleep(2)
+            print(f"✅ Servidor iniciado en http://{ip}:{self.port}")
             
             # Abrir navegador
-            webbrowser.open(f'http://localhost:{self.port}')
+            webbrowser.open(f'http://{ip}:{self.port}')
             
             # Ejecutar Flask sin mostrar consola
             app.run(
@@ -148,7 +152,7 @@ class LauncherSimple:
                 port=self.port,
                 use_reloader=False,
                 threaded=True,
-                host='127.0.0.1'
+                host=ip
             )
         except Exception as e:
             print(f"❌ Error: {e}")
@@ -168,8 +172,8 @@ class LauncherSimple:
                         lambda: None,
                         enabled=False
                     ),
+                    pystray.MenuItem("Powered By YSD", self.open_website),
                     pystray.MenuItem("Abrir", self.open_app),
-                    pystray.MenuItem("-", lambda: None),
                     pystray.MenuItem("Cerrar", self.close_app)
                 )
                 
@@ -189,7 +193,7 @@ class LauncherSimple:
     def open_app(self, icon=None, item=None):
         """Abre el navegador"""
         try:
-            webbrowser.open(f'http://localhost:{self.port}')
+            webbrowser.open(f'http://{ip}:{self.port}')
         except:
             pass
     
@@ -199,6 +203,13 @@ class LauncherSimple:
             self.tray_icon.stop()
         self.root.quit()
         sys.exit(0)
+    
+    def open_website(self, icon=None, item=None):
+        """Abre la web de YSD"""
+        try:
+            webbrowser.open("https://yuuruiizhin.github.io/Alejandra-Manager/")
+        except:
+            pass
 
 def main():
     root = ctk.CTk()
