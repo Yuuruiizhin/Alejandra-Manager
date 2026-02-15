@@ -25,6 +25,8 @@ body {
     color: var(--text-primary);
     overflow-x: hidden;
     min-height: 100vh;
+    max-width: 100vw;
+    width: 100%;
 }
 
 /* ============= HEADER (SIN controles de ventana) ============= */
@@ -87,6 +89,9 @@ body {
 #app-container {
     position: relative;
     min-height: calc(100vh - 100px);
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 .screen {
@@ -94,6 +99,9 @@ body {
     opacity: 0;
     animation: fadeIn 0.4s ease forwards;
     padding: 3rem 2rem;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 .screen.active {
@@ -169,6 +177,15 @@ body {
     font-size: 1rem;
     transition: all 0.3s ease;
     font-family: 'Outfit', sans-serif;
+}
+
+@media (max-width: 768px) {
+    .input-group input {
+        font-size: 16px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
 }
 
 .input-group input:focus {
@@ -886,27 +903,389 @@ body {
 
 /* ============= RESPONSIVE ============= */
 @media (max-width: 768px) {
-    .grid-container {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 1.5rem;
-        padding: 1.5rem;
+    /* General */
+    body {
+        overflow-x: hidden;
     }
 
+    .screen {
+        padding: 2rem 1rem;
+    }
+
+    /* Header */
+    .header {
+        padding: 0.8rem 1rem;
+    }
+
+    .logo-container {
+        gap: 0.5rem;
+    }
+
+    .logo-circle {
+        width: 40px;
+        height: 40px;
+    }
+
+    .logo-text {
+        font-size: 1.3rem;
+    }
+
+    /* Auth Card */
     .auth-card {
-        margin: 2rem auto;
-        padding: 2rem 1.5rem;
+        margin: 1.5rem auto;
+        padding: 1.5rem 1.2rem;
+        max-width: calc(100vw - 2rem);
+    }
+
+    .auth-title {
+        font-size: 1.8rem;
+        letter-spacing: 2px;
+    }
+
+    .input-group input {
+        padding: 0.8rem 0.8rem;
+        font-size: 16px;
+    }
+
+    .btn-continuar {
+        padding: 0.85rem;
+        font-size: 1.1rem;
+    }
+
+    /* Screen Header */
+    .screen-header {
+        padding: 0 1rem;
+        margin-bottom: 1.5rem;
+        gap: 1rem;
     }
 
     .section-title {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        margin-left: 0;
     }
 
+    #services-screen .section-title {
+        margin-left: 0;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Grid Container */
+    .grid-container {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 1rem;
+        padding: 1rem;
+        max-width: 100%;
+    }
+
+    .service-icon, .account-icon {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 0.5rem;
+    }
+
+    .service-name, .account-name {
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        padding: 0 0.5rem;
+    }
+
+    .plus-icon {
+        font-size: 3rem;
+    }
+
+    /* Back Button */
+    .back-button {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    /* User Footer */
+    .user-footer {
+        bottom: 1rem;
+        left: 1rem;
+        right: auto;
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .user-avatar {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        min-height: 40px;
+    }
+
+    .user-name {
+        font-size: 1.1rem;
+    }
+
+    /* Profile Container */
+    .profile-container {
+        max-width: 100%;
+        margin: 1rem auto;
+        padding: 1.5rem 1.2rem;
+    }
+
+    .profile-avatar {
+        width: 120px;
+        height: 120px;
+    }
+
+    .profile-username {
+        font-size: 1.8rem;
+    }
+
+    .profile-field input {
+        font-size: 16px;
+        padding: 0.8rem 0.8rem;
+    }
+
+    /* Modal Content */
+    .modal-content {
+        padding: 1.5rem 1.2rem;
+        max-width: calc(100vw - 2rem);
+        max-height: 90vh;
+        width: auto;
+        margin: 0 1rem;
+    }
+
+    .modal-title {
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+        margin-bottom: 1.5rem;
+    }
+
+    .modal-close-btn {
+        top: 1rem;
+        right: 1rem;
+    }
+
+    /* Upload Icon Container */
+    .upload-icon-btn {
+        width: 80px;
+        height: 80px;
+    }
+
+    .icon-preview img {
+        max-width: 100px;
+        max-height: 100px;
+    }
+
+    /* Images Grid */
     .images-grid {
         grid-template-columns: repeat(3, 1fr);
+        gap: 0.8rem;
     }
 
     .images-gallery {
         grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+    }
+
+    /* Account Detail */
+    .account-icon-display {
+        width: 100px;
+        height: 100px;
+    }
+
+    .detail-value-copy {
+        padding: 0.8rem 0.8rem;
+        font-size: 0.9rem;
+        flex-wrap: wrap;
+    }
+
+    .account-actions {
+        flex-wrap: wrap;
+        gap: 0.3rem;
+    }
+
+    .icon-btn {
+        padding: 0.5rem;
+    }
+}
+
+/* Extra Small Devices (< 480px) */
+@media (max-width: 480px) {
+    .screen {
+        padding: 1.5rem 0.8rem;
+    }
+
+    .header {
+        padding: 0.6rem 0.8rem;
+    }
+
+    .logo-circle {
+        width: 36px;
+        height: 36px;
+    }
+
+    .logo-text {
+        font-size: 1.1rem;
+    }
+
+    .auth-card {
+        margin: 1rem auto;
+        padding: 1.2rem 1rem;
+        max-width: calc(100vw - 1.6rem);
+    }
+
+    .auth-title {
+        font-size: 1.5rem;
+        letter-spacing: 1.5px;
+        margin-bottom: 1.5rem;
+    }
+
+    .input-group {
+        margin-bottom: 1rem;
+    }
+
+    .input-group label {
+        font-size: 0.85rem;
+    }
+
+    .input-group input {
+        padding: 0.75rem 0.7rem;
+        font-size: 16px;
+    }
+
+    .btn-continuar {
+        padding: 0.8rem;
+        font-size: 1rem;
+    }
+
+    .section-title {
+        font-size: 1.4rem;
+        letter-spacing: 1px;
+    }
+
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+        padding: 0.8rem;
+    }
+
+    .service-icon, .account-icon {
+        width: 70px;
+        height: 70px;
+    }
+
+    .service-name, .account-name {
+        font-size: 0.8rem;
+        letter-spacing: 0.5px;
+    }
+
+    .plus-icon {
+        font-size: 2.5rem;
+    }
+
+    .back-button {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        min-height: 40px;
+    }
+
+    .user-footer {
+        bottom: 0.8rem;
+        left: 0.8rem;
+        padding: 0.5rem 0.8rem;
+    }
+
+    .user-avatar {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        min-height: 36px;
+    }
+
+    .user-name {
+        font-size: 1rem;
+        display: none;
+    }
+
+    .profile-container {
+        padding: 1.2rem 1rem;
+        max-width: 100%;
+    }
+
+    .profile-avatar {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 1.5rem;
+    }
+
+    .profile-username {
+        font-size: 1.5rem;
+    }
+
+    .profile-field label {
+        font-size: 0.85rem;
+    }
+
+    .profile-field input {
+        font-size: 16px;
+        padding: 0.7rem 0.7rem;
+    }
+
+    .modal-content {
+        padding: 1.2rem 1rem;
+        max-width: calc(100vw - 1.6rem);
+        margin: 0 0.8rem;
+    }
+
+    .modal-title {
+        font-size: 1.3rem;
+        letter-spacing: 1px;
+        margin-bottom: 1.2rem;
+    }
+
+    .upload-icon-btn {
+        width: 70px;
+        height: 70px;
+    }
+
+    .input-group input,
+    .field-with-edit input {
+        font-size: 16px;
+    }
+
+    .images-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.6rem;
+    }
+
+    .add-image-btn {
+        border-radius: 6px;
+    }
+
+    .images-gallery {
+        grid-template-columns: 1fr;
+        gap: 0.6rem;
+    }
+
+    .account-icon-display {
+        width: 90px;
+        height: 90px;
+    }
+
+    .detail-value-copy {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .copy-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .account-actions {
+        gap: 0.2rem;
+    }
+
+    .icon-btn {
+        padding: 0.4rem;
     }
 }
 
