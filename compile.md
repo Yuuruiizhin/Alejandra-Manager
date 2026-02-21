@@ -1,0 +1,1 @@
+pyinstaller --name "Alejandra Manager" --icon=static/img/aml.ico --add-data=static;static --add-data=templates;templates --add-data=alejandra_manager.py;. --add-data=LICENSE;LICENSE --add-data=yrz_cipher.py;. --add-data=yrz_codek.json;. main.pyw
